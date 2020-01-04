@@ -3,7 +3,6 @@ import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 
 class CampsiteInfo extends React.Component {
     
-
     renderCampsite() {
         return (
             <div className='col-md-5 m-1'>
@@ -31,12 +30,7 @@ class CampsiteInfo extends React.Component {
                                     <p>
                                         {comment.text}<br />
                                         <i>
-                                            -- {comment.author}, 
-                                            {
-                                                new Intl.DateTimeFormat('en-US', 
-                                                { year: 'numeric', month: 'short', day: '2-digit'})
-                                                .format(new Date(Date.parse(comment.date)))
-                                            }
+                                            -- {comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse( comment.date)))}
                                         </i>
                                     </p>
                                 </div>
