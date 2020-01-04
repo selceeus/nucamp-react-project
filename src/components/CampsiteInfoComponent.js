@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 
 class CampsiteInfo extends React.Component {
     
@@ -19,17 +19,25 @@ class CampsiteInfo extends React.Component {
     }
 
     renderComments(comments) {
-        
+
         if (this.props.campsite.comments) {
             return (
                 <div className="col-md-5 m-1">
                     <h4>Comments</h4>
                     {
-                        this.props.campsite.comments.map( comments => {
+                        this.props.campsite.comments.map( comment => {
                             return(
-                                <div key={comments.id}>
-                                    <p>{comments.text}<br></br>
-                                    <i>--{comments.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comments.date)))}</i>
+                                <div key={comment.id}>
+                                    <p>
+                                        {comment.text}<br />
+                                        <i>
+                                            -- {comment.author}, 
+                                            {
+                                                new Intl.DateTimeFormat('en-US', 
+                                                { year: 'numeric', month: 'short', day: '2-digit'})
+                                                .format(new Date(Date.parse(comment.date)))
+                                            }
+                                        </i>
                                     </p>
                                 </div>
                             )
