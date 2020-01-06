@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { Component }  from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 
-class CampsiteInfo extends React.Component {
+class CampsiteInfo extends Component {
     
-    renderCampsite() {
+    renderCampsite(campsite) {
         return (
             <div className='col-md-5 m-1'>
                 <Card>
-                    <CardImg top src={this.props.campsite.image} alt={this.props.campsite.name} />
+                    <CardImg top src={campsite.image} alt={campsite.name} />
                     <CardBody>
-                        <CardTitle>{this.props.campsite.name}</CardTitle>
-                        <CardText>{this.props.campsite.description}</CardText>
+                        <CardTitle>{campsite.name}</CardTitle>
+                        <CardText>{campsite.description}</CardText>
                     </CardBody>
                 </Card>
             </div>
@@ -18,13 +18,12 @@ class CampsiteInfo extends React.Component {
     }
 
     renderComments(comments) {
-
-        if (this.props.campsite.comments) {
+        if (comments) {
             return (
                 <div className="col-md-5 m-1">
                     <h4>Comments</h4>
                     {
-                        this.props.campsite.comments.map( comment => {
+                        comments.map( comment => {
                             return(
                                 <div key={comment.id}>
                                     <p>
@@ -51,8 +50,8 @@ class CampsiteInfo extends React.Component {
         if (campsite) {
             return (
                 <div className="row">
-                    {this.renderCampsite()}
-                    {this.renderComments()}
+                    {this.renderCampsite(campsite)}
+                    {this.renderComments(campsite.comments)}
                 </div>
             );
         } else {
