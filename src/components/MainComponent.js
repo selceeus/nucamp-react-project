@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './HomeComponent';
 import Directory from './DirectoryComponent';
 import CampsiteInfo from './CampsiteInfoComponent';
+import About from './AboutComponent';
 import Contact from './ContactComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
@@ -50,7 +51,8 @@ class Main extends Component {
                         <Route path='/home' component={HomePage} />
                         <Route exact path='/directory' render={() => <Directory campsites={this.state.campsites} />} />
                         <Route path='/directory/:campsiteId' component={CampsiteWithId} />
-                        <Route exact path='/contactus' component={Contact} />
+                        <Route path='/aboutus' render={() => <About partners={this.state.partners} />} />
+                        <Route path='/contactus' component={Contact} />
                         <Redirect to='/home' />
                     </Switch>
                 <Footer />
