@@ -23,6 +23,8 @@ class Contact extends Component {
 
     render() {
 
+        const { firstName, lastName, phoneNum, email, agree, contactType, feedback } = this.state;
+
         const handleInputChange = (event) => {
             const target = event.target;
             const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -38,8 +40,6 @@ class Contact extends Component {
             alert('Current state is: ' + JSON.stringify(this.state));
             event.preventDefault();
         }
-
-        const { firstName, lastName, phoneNum, email, agree, contactType, feedback } = this.state;
 
         return (
             <div className="container">
