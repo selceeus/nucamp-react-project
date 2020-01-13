@@ -16,28 +16,31 @@ class Contact extends Component {
             feedback: ''
         };
 
-        this.handleInputChange = this. handleInputChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        //this.handleInputChange = this.handleInputChange.bind(this);
+        //this.handleSubmit = this.handleSubmit.bind(this);
 
-    }
-
-    handleInputChange(event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
-    }
-
-    handleSubmit(event) {
-        console.log('Current state is: ' + JSON.stringify(this.state));
-        alert('Current state is: ' + JSON.stringify(this.state));
-        event.preventDefault();
     }
 
     render() {
+
+        const handleInputChange = (event) => {
+            const target = event.target;
+            const value = target.type === 'checkbox' ? target.checked : target.value;
+            const name = target.name;
+    
+            this.setState({
+                [name]: value
+            });
+        }
+    
+        const handleSubmit = (event) => {
+            console.log('Current state is: ' + JSON.stringify(this.state));
+            alert('Current state is: ' + JSON.stringify(this.state));
+            event.preventDefault();
+        }
+
+        const { firstName, lastName, phoneNum, email, agree, contactType, feedback } = this.state;
+
         return (
             <div className="container">
                 <div className="row">
@@ -76,14 +79,14 @@ class Contact extends Component {
                       <hr />
                    </div>
                     <div className="col-md-10">
-                        <Form onSubmit={this.handleSubmit}>
+                        <Form onSubmit={handleSubmit}>
                             <FormGroup row>
                                 <Label htmlFor="firstName" md={2}>First Name</Label>
                                 <Col md={10}>
                                     <Input type="text" id="firstName" name="firstName"
                                         placeholder="First Name"
-                                        value={this.state.firstName}
-                                        onChange={this.handleInputChange} />
+                                        value={firstName}
+                                        onChange={handleInputChange} />
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
@@ -91,8 +94,8 @@ class Contact extends Component {
                                 <Col md={10}>
                                     <Input type="text" id="lastName" name="lastName"
                                         placeholder="Last Name"
-                                        value={this.state.lastName}
-                                        onChange={this.handleInputChange} />
+                                        value={lastName}
+                                        onChange={handleInputChange} />
                                 </Col>                        
                             </FormGroup>
                             <FormGroup row>
@@ -100,8 +103,8 @@ class Contact extends Component {
                                 <Col md={10}>
                                     <Input type="tel" id="phoneNum" name="phoneNum"
                                         placeholder="Phone number"
-                                        value={this.state.phoneNum}
-                                        onChange={this.handleInputChange} />
+                                        value={phoneNum}
+                                        onChange={handleInputChange} />
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
@@ -109,8 +112,8 @@ class Contact extends Component {
                                 <Col md={10}>
                                     <Input type="email" id="email" name="email"
                                         placeholder="Email"
-                                        value={this.state.email}
-                                        onChange={this.handleInputChange} />
+                                        value={email}
+                                        onChange={handleInputChange} />
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
@@ -119,16 +122,16 @@ class Contact extends Component {
                                         <Label check>
                                             <Input type="checkbox"
                                                 name="agree"
-                                                checked={this.state.agree}
-                                                onChange={this.handleInputChange} /> {' '}
+                                                checked={agree}
+                                                onChange={handleInputChange} /> {' '}
                                             <strong>May we contact you?</strong>
                                         </Label>
                                     </FormGroup>
                                 </Col>
                                 <Col md={4}>
                                     <Input type="select" name="contactType"
-                                            value={this.state.contactType}
-                                            onChange={this.handleInputChange}>
+                                            value={contactType}
+                                            onChange={handleInputChange}>
                                         <option>By Phone</option>
                                         <option>By Email</option>
                                     </Input>
@@ -139,8 +142,8 @@ class Contact extends Component {
                                 <Col md={10}>
                                     <Input type="textarea" id="feedback" name="feedback"
                                         rows="12"
-                                        value={this.state.feedback}
-                                        onChange={this.handleInputChange}></Input>
+                                        value={feedback}
+                                        onChange={handleInputChange}></Input>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
