@@ -10,13 +10,7 @@ class CommentForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isModalOpen: false,
-            rating: '',
-            author: '',
-            text: '',
-            touched: {
-                author: false
-            }
+            isModalOpen: false
         }
         this.toggleModal = this.toggleModal.bind(this);
     }
@@ -31,7 +25,6 @@ class CommentForm extends Component {
         console.log('Current state is: ' + JSON.stringify(values));
         alert('Current state is: ' + JSON.stringify(values));
     }
-
 
     render() {
         return(
@@ -145,9 +138,8 @@ function RenderComments({comments}) {
                 <CommentForm />
             </div>
         );
-    } else {
-        return <div></div>;
     }
+    return <div />
 }
     
 function CampsiteInfo({campsite, comments}) {
@@ -175,9 +167,9 @@ function CampsiteInfo({campsite, comments}) {
                 </div>
             </div>
         );
-    } else {
-        return <div></div>;
-    }
+    } 
+    return <div />;
+
 }
 
 export default CampsiteInfo;
