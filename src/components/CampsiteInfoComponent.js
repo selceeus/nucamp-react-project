@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody, Breadcrumb, BreadcrumbItem, Row, Button, Label, Modal, ModalHeader, ModalBody  } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
+import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
 
 const maxLength = len => val => !val || (val.length <= len);
@@ -143,8 +144,28 @@ function RenderComments({comments, addComment, campsiteId}) {
     return <div />
 }
     
-function CampsiteInfo({campsite, comments, addComment}) {
+function CampsiteInfo({campsite, comments, addComment, isLoading, errMess}) {
 
+    if(isLoading) {
+        return(
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    if (errMess) {
+        return(
+            <div className="container">
+                <div className="row">
+                    <div className="col">
+                        <h4>{errMess}</h4>
+                    </div>
+                </div>
+            </div>
+        );
+    }
     if (campsite) {
         return (
             <div className="container">
