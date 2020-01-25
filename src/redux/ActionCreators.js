@@ -184,3 +184,45 @@ export const partnersFailed = errMess => ({
     type: ActionTypes.PARTNERS_FAILED,
     payload: errMess
 });
+
+export const addCofmment = comment => ({
+    type: ActionTypes.ADD_COMMENT,
+    payload: comment
+});
+
+export const postFeedback = (feedback) => {
+    const newFeedback = {
+        firstname: feedback,
+        lastname: feedback,
+        telnum: feedback,
+        email: feedback,
+        agree: feedback,
+        contactType: feedback,
+        message: feedback
+    }
+    newFeedback.date = new Date().toISOString();
+
+    return fetch(baseUrl + 'feedback', {
+        method: "POST",
+        body: JSON.stringify(newFeedback),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                const error = new Error(`Error ${response.status}: ${response.statusText}`);
+                error.response = response;
+                throw error;
+            }
+        },
+        error => { throw error; }
+    )
+    .then(response => response.json())
+    .catch(error => {
+        console.log('post comment', error.message);
+        alert('Your comment could not be posted\nError: ' + error.message);
+    });
+};
