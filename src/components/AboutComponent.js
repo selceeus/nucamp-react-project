@@ -1,5 +1,6 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
+import { Loading } from './LoadingComponent';
 import { Link } from 'react-router-dom';
 
 
@@ -9,7 +10,7 @@ function About(props) {
         if(partners) {
             return(
                 <React.Fragment>
-                    <Media object src={partners.image} alt={partners.name} width='150'/>
+                    <Media object src={`/assets/${partners.image}`} alt={partners.name} width='150'/>
                     <Media body className='ml-5 mb-4'>
                         <Media heading>
                             {partners.name}
@@ -22,14 +23,38 @@ function About(props) {
             return <div />;
         }
     }
+    
+    const PartnersList = props => {
 
-    const partners = props.partners.map(partner => {
+        if(props.partners.isLoading) {
+            return (
+                <Loading />
+            );
+        }
+        if (props.partners.errMess) {
+            return(
+                <div className="col">
+                    <h4>{props.partners.errMess}</h4>
+                </div>
+            );
+        }
+
+        const partners = props.partners.partners.map(partner => {
+            return (
+                <Media tag="li" key={partner.id}>
+                    <RenderPartner partners={partner} />
+                </Media>
+            )
+        });
+
         return (
-            <Media tag="li" key={partner.id}>
-                <RenderPartner partners={partner} />
-            </Media>
-        );
-    });
+            <div className="col mt-4">
+                <Media list>
+                    {partners}
+                </Media>
+            </div>
+        )
+    }
 
     return (
         <div className="container">
@@ -84,9 +109,7 @@ function About(props) {
                     <h3>Community Partners</h3>
                 </div>
                 <div className="col mt-4">
-                    <Media list>
-                        {partners}
-                    </Media>
+                    <PartnersList partners={props.partners} />
                 </div>
             </div>
         </div>

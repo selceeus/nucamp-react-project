@@ -151,6 +151,7 @@ export const fetchPartners = () => (dispatch) => {
     dispatch(partnersLoading());
 
     return fetch(baseUrl + 'partners')
+
         .then(response => {
                 if (response.ok) {
                     return response;

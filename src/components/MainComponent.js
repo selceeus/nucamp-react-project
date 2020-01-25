@@ -36,6 +36,7 @@ class Main extends Component {
         this.props.fetchComments();
         this.props.fetchPromotions();
         this.props.fetchPartners();
+        console.log(this.props.partners)
     }
 
     render() {
