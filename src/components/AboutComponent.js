@@ -2,6 +2,7 @@ import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Loading } from './LoadingComponent';
 import { Link } from 'react-router-dom';
+import { Fade, Stagger } from 'react-animation-components';
 
 
 function About(props) {
@@ -41,16 +42,20 @@ function About(props) {
 
         const partners = props.partners.partners.map(partner => {
             return (
-                <Media tag="li" key={partner.id}>
-                    <RenderPartner partners={partner} />
-                </Media>
+                <Fade in key={partner.id}>
+                    <Media tag="li">
+                        <RenderPartner partners={partner} />
+                    </Media>
+                </Fade>
             )
         });
 
         return (
             <div className="col mt-4">
                 <Media list>
-                    {partners}
+                    <Stagger in>
+                        {partners}
+                    </Stagger>
                 </Media>
             </div>
         )
