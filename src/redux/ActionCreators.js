@@ -190,14 +190,15 @@ export const addCofmment = comment => ({
     payload: comment
 });
 
-export const postFeedback = (feedback) => {
+export const postFeedback = ({ firstName, lastName, phoneNum, email, agree, contactType, feedback, date }) => () =>{
+    
     const newFeedback = {
-        firstname: feedback,
-        lastname: feedback,
-        telnum: feedback,
-        email: feedback,
-        agree: feedback,
-        contactType: feedback,
+        firstname: firstName,
+        lastname: lastName,
+        telnum: phoneNum,
+        email: email,
+        agree: agree,
+        contactType: contactType,
         message: feedback
     }
     newFeedback.date = new Date().toISOString();
@@ -221,6 +222,10 @@ export const postFeedback = (feedback) => {
         error => { throw error; }
     )
     .then(response => response.json())
+    .then(response => {
+        console.log('Feedback: ', response);
+        alert('Thank you for your feedback!\n' + JSON.stringify(response));
+    })
     .catch(error => {
         console.log('post comment', error.message);
         alert('Your comment could not be posted\nError: ' + error.message);
